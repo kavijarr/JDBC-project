@@ -61,4 +61,15 @@ public class DashboardFormController {
             throw new RuntimeException(e);
         }
     }
+
+    public void placeOrderButtonOnAction(ActionEvent actionEvent) {
+        Stage stage = (Stage) pane.getScene().getWindow();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/PlaceOrderForm.fxml"))));
+            stage.show();
+            stage.setTitle("Place Order Form");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
