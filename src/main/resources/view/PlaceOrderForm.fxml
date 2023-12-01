@@ -13,36 +13,35 @@
 
 <AnchorPane fx:id="pane" prefHeight="704.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PlaceOrderFormController">
    <children>
-      <ComboBox fx:id="customerBox" layoutX="71.0" layoutY="95.0" prefHeight="41.0" prefWidth="186.0" />
-      <ComboBox fx:id="itemBox" layoutX="71.0" layoutY="179.0" prefHeight="41.0" prefWidth="186.0" />
-      <JFXTextField layoutX="294.0" layoutY="95.0" prefHeight="41.0" prefWidth="233.0" />
-      <JFXTextField layoutX="294.0" layoutY="187.0" prefHeight="33.0" prefWidth="233.0" />
+      <ComboBox fx:id="cmbID" layoutX="71.0" layoutY="95.0" prefHeight="41.0" prefWidth="186.0" />
+      <ComboBox fx:id="cmbItemCode" layoutX="71.0" layoutY="179.0" prefHeight="41.0" prefWidth="186.0" />
+      <JFXTextField fx:id="txtName" layoutX="294.0" layoutY="95.0" prefHeight="41.0" prefWidth="233.0" />
+      <JFXTextField fx:id="txtDesc" layoutX="294.0" layoutY="187.0" prefHeight="33.0" prefWidth="233.0" />
       <Label layoutX="71.0" layoutY="47.0" text="Customer ID" />
       <Label layoutX="71.0" layoutY="153.0" text="Item Code" />
       <Label layoutX="301.0" layoutY="47.0" text="Name" />
       <Label layoutX="294.0" layoutY="153.0" text="Description" />
-      <JFXTextField layoutX="556.0" layoutY="187.0" prefHeight="33.0" prefWidth="233.0" />
+      <JFXTextField fx:id="txtUnitPrice" layoutX="556.0" layoutY="187.0" prefHeight="33.0" prefWidth="233.0" />
       <Label layoutX="556.0" layoutY="153.0" text="Unit Price" />
-      <JFXTextField layoutX="832.0" layoutY="187.0" prefHeight="33.0" prefWidth="116.0" />
-      <Label layoutX="832.0" layoutY="145.0" text="QTY on Hand" />
-      <JFXButton layoutX="945.0" layoutY="243.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: #E37D13;" text="Add to Cart" />
-      <JFXTreeTableView layoutX="58.0" layoutY="307.0" prefHeight="293.0" prefWidth="935.0">
+      <JFXTextField fx:id="txtQty" layoutX="832.0" layoutY="187.0" prefHeight="33.0" prefWidth="116.0" />
+      <Label layoutX="832.0" layoutY="145.0" text="Buying QTY" />
+      <JFXButton layoutX="945.0" layoutY="243.0" onAction="#addToCartOnAction" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: #E37D13;" text="Add to Cart" />
+      <JFXTreeTableView fx:id="tblOrders" layoutX="58.0" layoutY="307.0" prefHeight="293.0" prefWidth="935.0">
          <columns>
-            <TreeTableColumn prefWidth="120.0" text="Code" />
-            <TreeTableColumn prefWidth="329.0" text="Description" />
-            <TreeTableColumn prefWidth="139.0" text="Unit Price" />
-            <TreeTableColumn prefWidth="105.0" text="QTY" />
-            <TreeTableColumn prefWidth="125.0" text="Amount" />
-            <TreeTableColumn prefWidth="116.0" text="Option" />
+            <TreeTableColumn fx:id="colCode" prefWidth="176.0" text="Code" />
+            <TreeTableColumn fx:id="colDesc" prefWidth="388.0" text="Description" />
+            <TreeTableColumn fx:id="colQty" prefWidth="114.0" text="QTY" />
+            <TreeTableColumn fx:id="colAmount" prefWidth="129.0" text="Amount" />
+            <TreeTableColumn fx:id="colOption" prefWidth="127.0" text="Option" />
          </columns>
       </JFXTreeTableView>
-      <JFXButton layoutX="945.0" layoutY="620.0" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: #FA6689;" text="Place Order" />
+      <JFXButton layoutX="945.0" layoutY="620.0" onAction="#placeOrderOnAction" prefHeight="41.0" prefWidth="97.0" style="-fx-background-color: #FA6689;" text="Place Order" />
       <Label layoutX="58.0" layoutY="624.0" prefHeight="33.0" prefWidth="71.0" text="Total:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="129.0" layoutY="624.0" prefHeight="33.0" prefWidth="71.0" text="0.00">
+      <Label fx:id="lblTotal" layoutX="129.0" layoutY="624.0" prefHeight="33.0" prefWidth="71.0" text="0.00">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

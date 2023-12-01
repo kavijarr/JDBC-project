@@ -11,4 +11,5 @@ public interface ItemModel {
    boolean saveItem(ItemDto dto) throws SQLException, ClassNotFoundException;
    boolean updateItem(ItemDto dto) throws SQLException, ClassNotFoundException;
    List<ItemDto> searchItem(String code) throws SQLException, ClassNotFoundException;
+   ItemDto getItem(String code) throws SQLException, ClassNotFoundException;
 }
