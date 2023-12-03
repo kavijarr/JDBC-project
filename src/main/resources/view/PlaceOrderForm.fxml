@@ -41,7 +41,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="lblTotal" layoutX="129.0" layoutY="624.0" prefHeight="33.0" prefWidth="71.0" text="0.00">
+      <Label fx:id="lblTotal" layoutX="129.0" layoutY="624.0" prefHeight="33.0" prefWidth="233.0" text="0.00">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -55,5 +55,10 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <Label fx:id="lblOrderId" layoutX="935.0" layoutY="39.0" prefHeight="33.0" prefWidth="116.0">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

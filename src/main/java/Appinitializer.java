@@ -17,6 +17,7 @@ public class Appinitializer extends Application {
         primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/DashboardForm.fxml"))));
         primaryStage.centerOnScreen();
         primaryStage.setResizable(true);
+        primaryStage.setTitle("Dashboard");
         primaryStage.show();
     }
 }

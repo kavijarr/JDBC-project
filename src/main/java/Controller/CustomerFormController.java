@@ -170,6 +170,7 @@ public class CustomerFormController {
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/DashboardForm.fxml"))));
             stage.show();
+            stage.setTitle("Dashboard");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
