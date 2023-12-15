@@ -1,5 +1,6 @@
 package model;
 
+import dto.ItemDto;
 import dto.OrderDetailsDto;
 import dto.Orderdto;
 
@@ -11,7 +12,7 @@ public interface OrderModel {
 
     Orderdto lastOrder() throws SQLException, ClassNotFoundException;
 
-    boolean removeFromStock(List<OrderDetailsDto> order) throws SQLException, ClassNotFoundException;
+    boolean removeFromStock(List<OrderDetailsDto> orders,List<ItemDto> itemList) throws SQLException, ClassNotFoundException;
 }
 
 
