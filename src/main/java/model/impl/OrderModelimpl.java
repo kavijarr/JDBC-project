@@ -2,6 +2,7 @@ package model.impl;
 
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import db.DBConection;
+import dto.OrderDetailsDto;
 import dto.Orderdto;
 import model.CustomerModel;
 import model.ItemModel;
@@ -12,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class OrderModelimpl implements OrderModel {
 
@@ -57,5 +59,18 @@ public class OrderModelimpl implements OrderModel {
             );
         }
         return null;
+    }
+
+    @Override
+    public boolean removeFromStock(List<OrderDetailsDto> orders) throws SQLException, ClassNotFoundException {
+        String sql = "UPDATE item SET qtyOnHand =? WHERE code =?";
+
+        PreparedStatement pstm = DBConection.getInstance().getConnection().prepareStatement(sql);
+        for (OrderDetailsDto order: orders) {
+            pstm.setInt(1, order.getQty());
+            pstm.setString(2,order.getItemCode());
+            pstm.executeUpdate();
+        }
+        return true;
     }
 }
