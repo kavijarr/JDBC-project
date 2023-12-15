@@ -134,45 +134,59 @@ public class PlaceOrderFormController {
     }
 
     public void addToCartOnAction(ActionEvent actionEvent) {
-        try {
-            double amount = itemModel.getItem(cmbItemCode.getValue().toString()).getUnitPrice() * Integer.parseInt(txtQty.getText());
-            JFXButton btn = new JFXButton("Delete");
-            OrderTm tm = new OrderTm(
-                    cmbItemCode.getValue().toString(),
-                    txtDesc.getText(),
-                    Integer.parseInt(txtQty.getText()),
-                    amount,
-                    btn
-            );
+        ItemDto itemDto = null;
+        for (ItemDto dto : items) {
+            if (cmbItemCode.getValue().equals(dto.getCode())) {
+                itemDto = dto;
+            }
+        }
+        if (Integer.parseInt(txtQty.getText()) > itemDto.getQty()) {
+            new Alert(Alert.AlertType.ERROR, "Item Not In Stock").show();
+        } else {
+            try {
+                double amount = itemModel.getItem(cmbItemCode.getValue().toString()).getUnitPrice() * Integer.parseInt(txtQty.getText());
+                JFXButton btn = new JFXButton("Delete");
+                OrderTm tm = new OrderTm(
+                        cmbItemCode.getValue().toString(),
+                        txtDesc.getText(),
+                        Integer.parseInt(txtQty.getText()),
+                        amount,
+                        btn
+                );
 
-            btn.setOnAction(actionEvent1 -> {
-                tmList.remove(tm);
-                total-=tm.getAmount();
-                lblTotal.setText(String.format("%.2f",total));
-                tblOrders.refresh();
-            });
+                btn.setOnAction(actionEvent1 -> {
+                    tmList.remove(tm);
+                    total -= tm.getAmount();
+                    lblTotal.setText(String.format("%.2f", total));
+                    tblOrders.refresh();
+                });
 
-            boolean isExist = false;
-            for (OrderTm order:tmList) {
-                if(order.getCode().equals(tm.getCode())){
-                    order.setQty(order.getQty()+tm.getQty());
-                    order.setAmount(order.getAmount()+tm.getAmount());
-                    isExist = true;
-                    total+=tm.getAmount();
+                boolean isExist = false;
+                for (OrderTm order : tmList) {
+                    if (order.getCode().equals(tm.getCode())) {
+                        isExist = true;
+                        if ((order.getQty()+Integer.parseInt(txtQty.getText()))>itemDto.getQty()){
+                            new Alert(Alert.AlertType.ERROR,"Item Not In Stock").show();
+                        }else{
+                            order.setQty(order.getQty() + tm.getQty());
+                            order.setAmount(order.getAmount() + tm.getAmount());
+                            total += tm.getAmount();
+                        }
+                    }
                 }
+                if (!isExist) {
+                    tmList.add(tm);
+                    total += tm.getAmount();
+                }
+                TreeItem<OrderTm> treeObject = new RecursiveTreeItem<OrderTm>(tmList, RecursiveTreeObject::getChildren);
+                tblOrders.setRoot(treeObject);
+                tblOrders.setShowRoot(false);
+                lblTotal.setText(String.format("%.2f", total));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
             }
-            if (!isExist){
-                tmList.add(tm);
-                total+=tm.getAmount();
-            }
-            TreeItem<OrderTm> treeObject = new RecursiveTreeItem<OrderTm>(tmList, RecursiveTreeObject::getChildren);
-            tblOrders.setRoot(treeObject);
-            tblOrders.setShowRoot(false);
-            lblTotal.setText(String.format("%.2f",total));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 
